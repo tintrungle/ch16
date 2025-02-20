@@ -1,0 +1,33 @@
+services:
+  accesslog:
+    image: ${REGISTRY}/${REPOSITORY}/ch16-access-log:2e-${BUILD_NUMBER:-0}
+    build:
+      context: ./access-log
+    ports:
+      - "8012:80"
+    networks:
+      - app-net
+
+  iotd:
+    image: ${REGISTRY}/${REPOSITORY}/ch16-image-of-the-day:2e-${BUILD_NUMBER:-0}
+    build:
+      context: ./image-of-the-day
+    ports:
+      - "8011:80"
+    networks:
+      - app-net
+
+  image-gallery:
+    image: ${REGISTRY}/${REPOSITORY}/ch16-image-gallery:2e-${BUILD_NUMBER:-0}
+    build:
+      context: ./image-gallery
+    ports:
+      - "8010:80"
+    depends_on:
+      - accesslog
+      - iotd
+    networks:
+      - app-net
+
+networks:
+  app-net:
