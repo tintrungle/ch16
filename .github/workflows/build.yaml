@@ -3,8 +3,8 @@ name: Build - DIAMOL:2e Ch16
 on:
   push:
     paths:
-      - ".github/workflows/ch16.yaml"
-      - "build/build.ps1"
+      - ".github/workflows/build.yaml"
+      - "cicd/build.ps1"
       - "src/**"
  # schedule:
  #   - cron: "0 23 * * 0"  # Every Sunday at 23:00
