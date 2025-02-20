@@ -5,7 +5,7 @@ try {
     $env:DOCKER_BUILD_CPU = $info.Server.Arch.ToLower()
     $env:OS_VERSION_TAG=''
     if ($env:DOCKER_BUILD_OS -eq 'windows') {
-        $env:OS_VERSION_TAG="-ltsc2022"
+        $env:OS_VERSION_TAG="-ltsc2025"
     }
 
     $composeFiles = @(

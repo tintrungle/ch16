@@ -10,7 +10,7 @@ on:
 
 jobs:
   package:
-    runs-on: windows-2022
+    runs-on: windows-2025
     if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
     steps:
       - uses: actions/checkout@master      
