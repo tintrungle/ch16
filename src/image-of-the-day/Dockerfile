@@ -19,7 +19,7 @@ FROM diamol/openjdk:2e
 
 WORKDIR /app
 COPY --from=package /usr/src/iotd/target/iotd-service-0.1.0.jar .
-COPY --from=test /src/tests.passed .
+COPY --from=test /usr/src/iotd/tests.passed .
 
 EXPOSE 80
 ENTRYPOINT ["java", "-jar", "/app/iotd-service-0.1.0.jar"]
