@@ -1,26 +1,35 @@
 services:
   accesslog:
-    image: ${REGISTRY}/${REPOSITORY}/ch16-access-log:2e-${BUILD_NUMBER:-0}
+    image: ${REGISTRY}/${REPOSITORY}/ch16-access-log:2e-${BUILD_NUMBER}
     build:
       context: ./access-log
+      args:
+        BUILD_ID: ${BUILD_ID}
+        COMMIT_SHA: ${COMMIT_SHA}
     ports:
       - "8012:80"
     networks:
       - app-net
 
   iotd:
-    image: ${REGISTRY}/${REPOSITORY}/ch16-image-of-the-day:2e-${BUILD_NUMBER:-0}
+    image: ${REGISTRY}/${REPOSITORY}/ch16-image-of-the-day:2e-${BUILD_NUMBER}
     build:
       context: ./image-of-the-day
+      args:
+        BUILD_ID: ${BUILD_ID}
+        COMMIT_SHA: ${COMMIT_SHA}
     ports:
       - "8011:80"
     networks:
       - app-net
 
   image-gallery:
-    image: ${REGISTRY}/${REPOSITORY}/ch16-image-gallery:2e-${BUILD_NUMBER:-0}
+    image: ${REGISTRY}/${REPOSITORY}/ch16-image-gallery:2e-${BUILD_NUMBER}
     build:
       context: ./image-gallery
+      args:
+        BUILD_ID: ${BUILD_ID}
+        COMMIT_SHA: ${COMMIT_SHA}
     ports:
       - "8010:80"
     depends_on:

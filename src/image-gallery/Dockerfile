@@ -25,7 +25,7 @@ COPY --from=build /server .
 COPY --from=test /tests.passed .
 RUN chmod +x server
 
-ARG BUILD_ID=local
+ARG BUILD_ID=docker
 ARG COMMIT_SHA=local
 LABEL build_id=${BUILD_ID}
 LABEL commit_sha=${COMMIT_SHA}

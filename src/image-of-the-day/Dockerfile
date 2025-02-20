@@ -24,7 +24,7 @@ COPY --from=test /tests.passed .
 EXPOSE 80
 ENTRYPOINT ["java", "-jar", "/app/iotd-service-0.1.0.jar"]
 
-ARG BUILD_ID=local
+ARG BUILD_ID=docker
 ARG COMMIT_SHA=local
 LABEL build_id=${BUILD_ID}
 LABEL commit_sha=${COMMIT_SHA}
