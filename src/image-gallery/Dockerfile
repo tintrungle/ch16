@@ -9,7 +9,7 @@ RUN go build -o /server
 FROM build AS test
 COPY sample_test.go /src/
 RUN go test && \
-    touch tests.passed
+    echo '' > tests.passed
 
 # app
 FROM diamol/base:2e

@@ -12,7 +12,7 @@ RUN npm install jest --save-dev
 FROM jest AS test
 COPY src/ .
 RUN npm test && \
-    touch tests.passed
+    echo '' > tests.passed
 
 # app
 FROM diamol/node:2e

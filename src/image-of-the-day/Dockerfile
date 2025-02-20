@@ -8,7 +8,7 @@ COPY . .
 # unit tests
 FROM build AS test
 RUN mvn test && \
-    touch tests.passed
+    echo '' > tests.passed
 
 # publish
 FROM build AS package
