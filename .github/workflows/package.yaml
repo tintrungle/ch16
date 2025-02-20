@@ -1,0 +1,29 @@
+name: package
+
+on:
+  push:
+    paths:
+      - ".github/workflows/package.yaml"
+      - "cicd/package.ps1"
+  workflow_run:
+    workflows: ["build"]
+    types: [completed]
+    branches:
+      - "main"
+  schedule:
+    - cron: "0 23 * * 0"  # Every Sunday at 23:00
+  workflow_dispatch:
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
+    steps:
+      - uses: actions/checkout@master
+      - name: package
+        working-directory: cicd
+        run: ./package.ps1
+        shell: pwsh
+        env: 
+          REGISTRY: ghcr.io
+          REPOSITORY: ${{ github.repository }}
