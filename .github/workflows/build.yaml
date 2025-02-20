@@ -17,5 +17,5 @@ jobs:
       - uses: actions/checkout@master
       - name: build
         working-directory: cicd
-        run: build.ps1
+        run: ./build.ps1
         shell: pwsh
