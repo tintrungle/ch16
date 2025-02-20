@@ -2,7 +2,7 @@ name: package-windows
 
 on:
   workflow_run:
-    workflows: ["package-windows"]
+    workflows: ["package"]
     types: [completed]
     branches:
       - "main"
