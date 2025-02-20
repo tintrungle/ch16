@@ -1,10 +1,6 @@
 name: package
 
 on:
-  push:
-    paths:
-      - ".github/workflows/package.yaml"
-      - "cicd/package.ps1"
   workflow_run:
     workflows: ["build"]
     types: [completed]

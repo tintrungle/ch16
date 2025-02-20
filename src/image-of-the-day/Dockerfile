@@ -8,7 +8,7 @@ COPY . .
 # unit tests
 FROM build AS test
 RUN mvn test && \
-    touch /tests.passed
+    touch tests.passed
 
 # publish
 FROM build AS package
@@ -19,7 +19,7 @@ FROM diamol/openjdk:2e
 
 WORKDIR /app
 COPY --from=package /usr/src/iotd/target/iotd-service-0.1.0.jar .
-COPY --from=test /tests.passed .
+COPY --from=test /src/tests.passed .
 
 EXPOSE 80
 ENTRYPOINT ["java", "-jar", "/app/iotd-service-0.1.0.jar"]

@@ -9,7 +9,7 @@ RUN go build -o /server
 FROM build AS test
 COPY sample_test.go /src/
 RUN go test && \
-    touch /tests.passed
+    touch tests.passed
 
 # app
 FROM diamol/base:2e
@@ -22,7 +22,7 @@ CMD ["/web/server"]
 WORKDIR /web
 COPY index.html .
 COPY --from=build /server .
-COPY --from=test /tests.passed .
+COPY --from=test /src/tests.passed .
 RUN chmod +x server
 
 ARG BUILD_ID=docker

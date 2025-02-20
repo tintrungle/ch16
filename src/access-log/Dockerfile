@@ -12,7 +12,7 @@ RUN npm install jest --save-dev
 FROM jest AS test
 COPY src/ .
 RUN npm test && \
-    touch /tests.passed
+    touch tests.passed
 
 # app
 FROM diamol/node:2e
@@ -22,7 +22,7 @@ CMD ["node", "server.js"]
 
 WORKDIR /app
 COPY --from=build /src/node_modules/ /app/node_modules/
-COPY --from=test /tests.passed .
+COPY --from=test /src/tests.passed .
 COPY src/ .
 
 ARG BUILD_ID=docker
