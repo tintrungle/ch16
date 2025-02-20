@@ -1,0 +1,21 @@
+services:
+  accesslog:
+    image: ${REGISTRY}/${REPOSITORY}/ch16-access-log:2e-${DOCKER_BUILD_OS}${OS_VERSION_TAG}-${DOCKER_BUILD_CPU}-${BUILD_NUMBER}
+    build:
+      args:
+        BUILD_ID: ${BUILD_ID}
+        COMMIT_SHA: ${COMMIT_SHA}
+        
+  iotd:
+    image: ${REGISTRY}/${REPOSITORY}/ch16-image-of-the-day:2e-${DOCKER_BUILD_OS}${OS_VERSION_TAG}-${DOCKER_BUILD_CPU}-${BUILD_NUMBER}
+    build:
+      args:
+        BUILD_ID: ${BUILD_ID}
+        COMMIT_SHA: ${COMMIT_SHA}
+
+  image-gallery:
+    image: ${REGISTRY}/${REPOSITORY}/ch16-image-gallery:2e-${DOCKER_BUILD_OS}${OS_VERSION_TAG}-${DOCKER_BUILD_CPU}-${BUILD_NUMBER}
+    build:
+      args:
+        BUILD_ID: ${BUILD_ID}
+        COMMIT_SHA: ${COMMIT_SHA}

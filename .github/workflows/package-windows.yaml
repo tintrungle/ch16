@@ -1,0 +1,35 @@
+name: package-windows
+
+on:
+  workflow_run:
+    workflows: ["package-windows"]
+    types: [completed]
+    branches:
+      - "main"
+  workflow_dispatch:
+
+jobs:
+  package:
+    runs-on: windows-2022
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
+    steps:
+      - uses: actions/checkout@master      
+      - name: GHCR login
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: package
+        working-directory: cicd
+        run: ./package.ps1
+        shell: pwsh
+        env: 
+          REGISTRY: ghcr.io
+          REPOSITORY: ${{ github.repository_owner }}
+          BUILD_NUMBER: ${{ github.run_number }}
+          BUILD_ID: ${{ github.workflow_ref }}
+          COMMIT_SHA: ${{ github.sha	}}
+    permissions:
+      contents: read
+      packages: write
