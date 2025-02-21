@@ -1,11 +1,8 @@
 
 try {
+    . ./set-vars.ps1
     pushd ../src
-    $components = (
-        'access-log',
-        'image-gallery',
-        'image-of-the-day'
-    )
+
     foreach ($component in $components) {
         echo "*** Building: $component with unit tests"
         pushd $component

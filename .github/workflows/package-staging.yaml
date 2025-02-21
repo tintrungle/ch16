@@ -1,4 +1,4 @@
-name: package
+name: package-staging
 
 on:
   workflow_run:
@@ -28,7 +28,7 @@ jobs:
         shell: pwsh
         env: 
           REGISTRY: ghcr.io
-          REPOSITORY: ${{ github.repository_owner }}
+          REPOSITORY: ${{ github.repository_owner }}-staging
           BUILD_NUMBER: ${{ github.run_number }}
           BUILD_ID: ${{ github.workflow_ref }}
           COMMIT_SHA: ${{ github.sha	}}

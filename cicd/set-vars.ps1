@@ -1,5 +1,11 @@
 # sets common variables used in other scripts
 
+$components = (
+    'access-log',
+    'image-gallery',
+    'image-of-the-day'
+}
+
 $info = docker version -f json | ConvertFrom-Json
 $env:DOCKER_BUILD_OS = $info.Server.Os.ToLower()
 $env:DOCKER_BUILD_CPU = $info.Server.Arch.ToLower()
