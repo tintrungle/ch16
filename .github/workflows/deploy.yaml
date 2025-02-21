@@ -13,7 +13,7 @@ env:
   REPOSITORY: ${{ github.repository_owner }}
 
 jobs:
-  smoke-test:
+  deploy:
     runs-on: ubuntu-latest
     if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
     steps:
@@ -35,5 +35,5 @@ jobs:
             --k3s-arg "--no-deploy=traefik,servicelb,metrics-server@server:*"
       - name: get-nodes
         run: |
-          kubectl config use-context ch16
+          kubectl config use-context k3d-ch16
           kubectl get nodes -o wide
