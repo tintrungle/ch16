@@ -25,12 +25,12 @@ try {
         $target = ($toSpec.services.PSObject.properties | where { $_.Name -eq $component }).Value.image
         echo "*** Tagging: $source to: $target"
         docker tag $source $target
+        
+        if (-not $NoPush) {
+            echo "Pushing: $target"
+            docker push $target
+        }
     }  
-
-    if (-not $NoPush) {
-        echo "Pushing images with: $To tag"
-        docker compose $toComposeFiles push
-    }
 }
 finally {
     popd
