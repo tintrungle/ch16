@@ -1,0 +1,32 @@
+name: package-release-windows
+
+on:
+  workflow_run:
+    workflows: ["smoke-test-windows"]
+    types: [completed]
+    branches:
+      - "main"
+
+env:
+  REGISTRY: ghcr.io
+  REPOSITORY: ${{ github.repository_owner }}
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
+    steps:
+      - uses: actions/checkout@master      
+      - name: GHCR login
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: push-release
+        working-directory: cicd
+        run: ./tag-push.ps1 -From staging -To release
+        shell: pwsh
+    permissions:
+      contents: read
+      packages: write
