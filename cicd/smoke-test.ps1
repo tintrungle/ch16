@@ -27,13 +27,23 @@ try {
         echo $response
         $exitCode = 1
     }
+    
+    $response = Invoke-WebRequest http://localhost:8011/image
+    if ($response.StatusCode -eq '200') {
+        echo 'API OK!'
+    }
+    else {
+        echo 'FAILED API'
+        echo $response
+        $exitCode = 2
+    }
 
     $response = Invoke-WebRequest http://localhost:8010
     if ($response.StatusCode -eq '200' -and $response.Images.Count -eq 1) {
-        echo 'Smoke tests OK!'
+        echo 'Web tests OK!'
     }
     else {
-        echo 'FAILED'
+        echo 'FAILED web'
         echo $response
         $exitCode = 2
     }

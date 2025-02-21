@@ -20,16 +20,6 @@ jobs:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - name: debug
-        working-directory: src
-        shell: bash
-        run: |
-          sudo REGISTRY=ghcr.io REPOSITORY=diamol2e DOCKER_BUILD_OS=linux DOCKER_BUILD_CPU=amd64 docker compose  -f docker-compose.yml -f docker-compose-release-tags.yml config
-          sudo REGISTRY=ghcr.io REPOSITORY=diamol2e DOCKER_BUILD_OS=linux DOCKER_BUILD_CPU=amd64 docker compose  -f docker-compose.yml -f docker-compose-release-tags.yml up -d
-          curl http://localhost:8010
-        env: 
-          REGISTRY: ghcr.io
-          REPOSITORY: ${{ github.repository_owner }}
       - name: smoke-test
         working-directory: cicd
         run: ./smoke-test.ps1 -RunAsAdmin
