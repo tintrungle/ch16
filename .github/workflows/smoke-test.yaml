@@ -1,4 +1,4 @@
-name: package
+name: smoke-test
 
 on:
   workflow_run:
