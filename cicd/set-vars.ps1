@@ -6,6 +6,20 @@ $components = (
     'image-of-the-day'
 )
 
+$composeFiles = @(
+    '-f', 'docker-compose.yml'
+)
+$buildComposeFiles = $composeFiles + @(
+    '-f', 'docker-compose-build.yml',
+    '-f', 'docker-compose-build-tags.yml'
+)
+$stagingComposeFiles = $composeFiles + @(        
+    '-f', 'docker-compose-staging-tags.yml'
+)
+$releaseComposeFiles = $composeFiles + @(        
+    '-f', 'docker-compose-release-tags.yml'
+)
+
 $info = docker version -f json | ConvertFrom-Json
 $env:DOCKER_BUILD_OS = $info.Server.Os.ToLower()
 $env:DOCKER_BUILD_CPU = $info.Server.Arch.ToLower()

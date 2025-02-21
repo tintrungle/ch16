@@ -2,10 +2,6 @@ param(
     [switch]$NoPull=$false
 )
 
-$composeFiles = @(
-    '-f', 'docker-compose.yml',
-    '-f', 'docker-compose-release-tags.yml'
-)
 $exitCode = 0
 
 try {
@@ -13,10 +9,10 @@ try {
     pushd ../src
 
     if (-not $NoPull) {
-        docker compose $composeFiles pull --ignore-pull-failures
+        docker compose $stagingComposeFiles pull --ignore-pull-failures
     }
 
-    docker compose $composeFiles up -d
+    docker compose $stagingComposeFiles up -d
     sleep 10
 
     $project = docker compose ls --format json | ConvertFrom-Json
@@ -51,11 +47,11 @@ try {
 }
 catch {
     echo "ERROR: $($_.Exception.Message)"
-    docker compose $composeFiles logs
+    docker compose $stagingComposeFiles logs
     $exitCode = 3
 }
 finally {
-    docker compose $composeFiles down
+    docker compose $stagingComposeFiles down
     popd
 }
 
