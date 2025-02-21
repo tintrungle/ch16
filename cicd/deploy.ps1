@@ -8,9 +8,9 @@ try {
     pushd ../helm/iotd
 
     helm install iotd `
-        --set api.image = $releaseSpec.services.'image-of-the-day'.image `
-        --set log.image = $releaseSpec.services.'access-log'.image `
-        --set web.image = $releaseSpec.services.'image-gallery'.image `
+        --set api.image=$releaseSpec.services.'image-of-the-day'.image `
+        --set log.image=$releaseSpec.services.'access-log'.image `
+        --set web.image=$releaseSpec.services.'image-gallery'.image `
         .
 }
 finally {
