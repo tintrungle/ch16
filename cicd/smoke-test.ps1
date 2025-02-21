@@ -40,6 +40,7 @@ try {
 }
 catch {
     echo "ERROR: $($_.Exception.Message)"
+    docker compose $composeFiles logs
     $exitCode = 3
 }
 finally {
