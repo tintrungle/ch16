@@ -24,8 +24,11 @@ jobs:
         working-directory: src
         shell: bash
         run: |
+          export DOCKER_BUILD_OS='Linux'
+          export DOCKER_BUILD_CPU='amd64'
           docker compose  -f docker-compose.yml -f docker-compose-release-tags.yml pull
           sudo docker compose  -f docker-compose.yml -f docker-compose-release-tags.yml up -d
+          curl http://localhost:8010
       - name: smoke-test
         working-directory: cicd
         run: ./smoke-test.ps1 -RunAsAdmin
