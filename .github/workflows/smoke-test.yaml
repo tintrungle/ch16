@@ -24,9 +24,8 @@ jobs:
         working-directory: src
         shell: bash
         run: |
-          sudo export DOCKER_BUILD_OS='Linux'
-          sudo export DOCKER_BUILD_CPU='amd64'
-          sudo docker compose  -f docker-compose.yml -f docker-compose-release-tags.yml up -d
+          sudo REGISTRY=gchr.io REPOSITORY=diamol2e DOCKER_BUILD_OS=linux DOCKER_BUILD_CPU=amd64 docker compose  -f docker-compose.yml -f docker-compose-release-tags.yml config
+          sudo REGISTRY=gchr.io REPOSITORY=diamol2e DOCKER_BUILD_OS=linux DOCKER_BUILD_CPU=amd64 docker compose  -f docker-compose.yml -f docker-compose-release-tags.yml up -d
           curl http://localhost:8010
         env: 
           REGISTRY: ghcr.io
