@@ -1,3 +1,6 @@
+param(
+    [switch]$NoPush=$false
+)
 
 try {
     . ./set-vars.ps1
@@ -15,18 +18,22 @@ try {
     echo "Building images with build number tag: $env:BUILD_NUMBER"
     docker compose $buildComposeFiles build --pull
     
-    echo "Pushing images with build number tag: $env:BUILD_NUMBER"
-    docker compose $buildComposeFiles push
+    if (-not $NoPush) {
+        echo "Pushing images with build number tag: $env:BUILD_NUMBER"
+        docker compose $buildComposeFiles push
+    }
 
     $releaseComposeFiles = $composeFiles + @(        
         '-f', 'docker-compose-release-tags.yml'
     )
 
     echo 'Building images with release tag'
-    docker compose $buildComposeFiles build --quiet
+    docker compose $releaseComposeFiles build --quiet    
     
-    echo 'Pushing images with release tag'
-    docker compose $buildComposeFiles push --quiet
+    if (-not $NoPush) {
+        echo 'Pushing images with release tag'
+        docker compose $releaseComposeFiles push --quiet
+    }
 }
 finally {
     popd
