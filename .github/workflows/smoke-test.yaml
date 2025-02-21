@@ -22,7 +22,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: smoke-test
         working-directory: cicd
-        run: ./smoke-test.ps1
+        run: ./smoke-test.ps1 -RunAsAdmin
         shell: pwsh
         env: 
           REGISTRY: ghcr.io
