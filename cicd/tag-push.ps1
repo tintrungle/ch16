@@ -29,7 +29,7 @@ try {
 
     if (-not $NoPush) {
         echo "Pushing images with: $To tag"
-        docker compose $toComposeFiles push --quiet
+        docker compose $toComposeFiles push
     }
 }
 finally {
