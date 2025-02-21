@@ -1,0 +1,29 @@
+name: smoke-test-windows
+
+on:
+  workflow_run:
+    workflows: ["package-windows"]
+    types: [completed]
+    branches:
+      - "main"
+  workflow_dispatch:
+
+jobs:
+  smoke-test-windows:
+    runs-on: windows-2022
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
+    steps:
+      - uses: actions/checkout@master      
+      - name: GHCR login
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: smoke-test-windows
+        working-directory: cicd
+        run: ./smoke-test.ps1
+        shell: pwsh
+        env: 
+          REGISTRY: ghcr.io
+          REPOSITORY: ${{ github.repository_owner }}
