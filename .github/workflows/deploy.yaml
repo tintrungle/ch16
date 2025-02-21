@@ -30,10 +30,13 @@ jobs:
           cluster-name: ch16
           args: >-
             --agents 1
-            -p "8010:8010@agent:0:direct"
+            -p "8016:8016@agent:0:direct"
             --no-lb
             --k3s-arg "--no-deploy=traefik,servicelb,metrics-server@server:*"
-      - name: get-nodes
+      - name: set-context
         run: |
           kubectl config use-context k3d-ch16
-          kubectl get nodes -o wide
+      - name: deploy
+        working-directory: cicd
+        run: ./deploy.ps1
+        shell: pwsh
