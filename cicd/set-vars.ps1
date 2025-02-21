@@ -7,8 +7,3 @@ $env:OS_VERSION_TAG=''
 if ($env:DOCKER_BUILD_OS -eq 'windows') {
     $env:OS_VERSION_TAG="-ltsc2022"
 }
-
-$composeFiles = @(
-    '-f', 'docker-compose.yml',
-    '-f', 'docker-compose-package.yml'
-)

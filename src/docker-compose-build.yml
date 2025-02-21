@@ -1,0 +1,18 @@
+services:
+  accesslog:
+    build:
+      args:
+        BUILD_ID: ${BUILD_ID}
+        COMMIT_SHA: ${COMMIT_SHA}
+        
+  iotd:
+    build:
+      args:
+        BUILD_ID: ${BUILD_ID}
+        COMMIT_SHA: ${COMMIT_SHA}
+
+  image-gallery:
+    build:
+      args:
+        BUILD_ID: ${BUILD_ID}
+        COMMIT_SHA: ${COMMIT_SHA}
