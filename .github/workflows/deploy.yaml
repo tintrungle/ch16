@@ -1,11 +1,11 @@
 name: deploy
 
 on:
-#  workflow_run:
-#    workflows: ["package-release"]
-#    types: [completed]
-#    branches:
-#      - "main"
+  workflow_run:
+    workflows: ["package-release"]
+    types: [completed]
+    branches:
+      - "main"
   workflow_dispatch:
 
 env:
@@ -40,3 +40,4 @@ jobs:
         working-directory: cicd
         run: ./deploy.ps1
         shell: pwsh
+      # TODO - smoke test
