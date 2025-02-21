@@ -20,6 +20,12 @@ jobs:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
+      - name: debug
+        working-directory: src
+        shell: bash
+        run: |
+          docker compose  -f docker-compose.yml -f docker-compose-release-tags.yml pull
+          sudo docker compose  -f docker-compose.yml -f docker-compose-release-tags.yml up -d
       - name: smoke-test
         working-directory: cicd
         run: ./smoke-test.ps1 -RunAsAdmin
