@@ -27,7 +27,7 @@ try {
         echo $response
         $exitCode = 1
     }
-    
+
     $response = Invoke-WebRequest http://localhost:8010
     if ($response.StatusCode -eq '200' -and $response.Images.Count -eq 1) {
         echo 'Smoke tests OK!'
@@ -39,6 +39,7 @@ try {
     }
 }
 catch {
+    echo "ERROR: $($_.Exception.Message)"
     $exitCode = 3
 }
 finally {
