@@ -23,6 +23,10 @@ try {
     foreach ($component in $components) {
         $source = ($fromSpec.services.PSObject.properties | where { $_.Name -eq $component }).Value.image
         $target = ($toSpec.services.PSObject.properties | where { $_.Name -eq $component }).Value.image
+        
+        echo "Pulling: $source"
+        docker pull $source
+
         echo "*** Tagging: $source to: $target"
         docker tag $source $target
         
