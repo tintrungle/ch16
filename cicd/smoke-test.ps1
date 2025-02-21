@@ -1,3 +1,6 @@
+param(
+    [switch]$NoPull=$false
+)
 
 $composeFiles = @(
     '-f', 'docker-compose.yml',
@@ -9,9 +12,22 @@ try {
     . ./set-vars.ps1
     pushd ../src
 
-    docker compose $composeFiles pull --ignore-pull-failures
+    if (-not $NoPull) {
+        docker compose $composeFiles pull --ignore-pull-failures
+    }
+
     docker compose $composeFiles up -d
 
+    $project = docker compose ls --format json | ConvertFrom-Json
+    if ($project.Status -eq 'running(3)') {
+        echo 'Compose project running!'
+    }
+    else {
+        echo 'FAILED'
+        echo $response
+        $exitCode = 1
+    }
+    
     $response = Invoke-WebRequest http://localhost:8010
     if ($response.StatusCode -eq '200' -and $response.Images.Count -eq 1) {
         echo 'Smoke tests OK!'
@@ -23,7 +39,7 @@ try {
     }
 }
 catch {
-    $exitCode = 1
+    $exitCode = 3
 }
 finally {
     docker compose $composeFiles down
