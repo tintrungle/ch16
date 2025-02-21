@@ -1,8 +1,8 @@
 services:
-  accesslog:
+  access-log:
     image: ${REGISTRY}/${REPOSITORY}/ch16-access-log:2e-${DOCKER_BUILD_OS}${OS_VERSION_TAG}-${DOCKER_BUILD_CPU}
         
-  iotd:
+  image-of-the-day:
     image: ${REGISTRY}/${REPOSITORY}/ch16-image-of-the-day:2e-${DOCKER_BUILD_OS}${OS_VERSION_TAG}-${DOCKER_BUILD_CPU}
 
   image-gallery:

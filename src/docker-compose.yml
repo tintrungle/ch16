@@ -1,12 +1,12 @@
 services:
-  accesslog:
+  access-log:
     image: ch16-access-log:2e
     ports:
       - "8012:80"
     networks:
       - app-net
 
-  iotd:
+  image-of-the-day:
     image: ch16-image-of-the-day:2e
     ports:
       - "8011:80"
@@ -18,8 +18,8 @@ services:
     ports:
       - "8010:80"
     depends_on:
-      - accesslog
-      - iotd
+      - access-log
+      - image-of-the-day
     networks:
       - app-net
 

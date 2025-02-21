@@ -4,7 +4,7 @@ $components = (
     'access-log',
     'image-gallery',
     'image-of-the-day'
-}
+)
 
 $info = docker version -f json | ConvertFrom-Json
 $env:DOCKER_BUILD_OS = $info.Server.Os.ToLower()

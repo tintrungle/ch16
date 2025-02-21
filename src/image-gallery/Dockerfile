@@ -14,8 +14,8 @@ RUN go test && \
 # app
 FROM diamol/base:2e
 
-ENV IMAGE_API_URL="http://iotd/image" \
-    ACCESS_API_URL="http://accesslog/access-log"
+ENV IMAGE_API_URL="http://image-of-the-day/image" \
+    ACCESS_API_URL="http://access-log/access-log"
 
 CMD ["/web/server"]
 
