@@ -1,5 +1,6 @@
 try {
     . ./set-vars.ps1
+    $wd=$pwd
     pushd ../src
 
     foreach ($component in $components) {
@@ -14,5 +15,5 @@ try {
     }
 }
 finally {
-    popd
+    cd $wd
 }
