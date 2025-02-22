@@ -1,4 +1,3 @@
-
 try {
     . ./set-vars.ps1
     pushd ../src
@@ -7,6 +6,10 @@ try {
         echo "*** Building: $component with unit tests"
         pushd $component
         docker build -t "$component-test" --target test .
+        if ($LASTEXITCODE -ne 0) {
+            echo "*** Build FAILED: $component"
+            exit 1
+        }
         popd
     }
 }
