@@ -1,5 +1,5 @@
 param(
-    [switch]$NoPull=$false
+    [switch]$Local=$false
 )
 
 $exitCode = 0
@@ -8,11 +8,14 @@ try {
     . ./set-vars.ps1
     pushd ../src
 
-    if (-not $NoPull) {
-        docker compose $stagingComposeFiles pull --ignore-pull-failures
+    if ($Local) {
+        $compose = $buildComposeFiles
+    }
+    else {
+        $compose = $stagingComposeFiles
     }
 
-    docker compose $stagingComposeFiles up -d
+    docker compose $compose up -d
     sleep 10
 
     $project = docker compose ls --format json | ConvertFrom-Json
@@ -47,11 +50,11 @@ try {
 }
 catch {
     echo "ERROR: $($_.Exception.Message)"
-    docker compose $stagingComposeFiles logs
+    docker compose $compose logs
     $exitCode = 3
 }
 finally {
-    docker compose $stagingComposeFiles down
+    docker compose $compose down
     popd
 }
 
