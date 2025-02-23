@@ -1,6 +1,9 @@
 name: package-release-windows
 
 on:
+  push:
+    paths:
+      - ".github/workflows/package-release-windows.yaml"
   workflow_run:
     workflows: ["smoke-test-windows"]
     types: [completed]

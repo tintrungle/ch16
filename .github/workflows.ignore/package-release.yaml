@@ -1,6 +1,9 @@
 name: package-release
 
 on:
+  push:
+    paths:
+      - ".github/workflows/package-release.yaml"
   workflow_run:
     workflows: ["smoke-test"]
     types: [completed]

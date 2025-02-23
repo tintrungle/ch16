@@ -1,6 +1,9 @@
 name: deploy
 
 on:
+  push:
+    paths:
+      - ".github/workflows/deploy.yaml"
   workflow_run:
     workflows: ["package-release"]
     types: [completed]

@@ -1,6 +1,9 @@
 name: package-staging
 
 on:
+  push:
+    paths:
+      - ".github/workflows/package-staging.yaml"
   workflow_run:
     workflows: ["build"]
     types: [completed]
