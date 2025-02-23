@@ -16,7 +16,7 @@ try {
     }
 
     docker compose $compose up -d
-    sleep 10
+    sleep $sleepSeconds
 
     $project = docker compose ls --format json | ConvertFrom-Json
     if ($project.Status -eq 'running(3)') {
