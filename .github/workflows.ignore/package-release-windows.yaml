@@ -5,7 +5,7 @@ on:
     paths:
       - ".github/workflows/package-release-windows.yaml"
   workflow_run:
-    workflows: ["package-release-windows"]
+    workflows: [smoke-test-windows]
     types: [completed]
     branches:
       - "main"

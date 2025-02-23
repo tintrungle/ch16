@@ -2,7 +2,7 @@ name: package-staging-windows
 
 on:
   workflow_run:
-    workflows: ["package-staging"]
+    workflows: [package-staging]
     types: [completed]
     branches:
       - "main"

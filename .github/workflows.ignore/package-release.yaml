@@ -5,7 +5,7 @@ on:
     paths:
       - ".github/workflows/package-release.yaml"
   workflow_run:
-    workflows: ["package-release"]
+    workflows: [smoke-test]
     types: [completed]
     branches:
       - "main"
